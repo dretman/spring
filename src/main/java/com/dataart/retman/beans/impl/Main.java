@@ -7,15 +7,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
-    public static void main1(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("knights.xml");
-        Knight knight = (Knight) context.getBean("braveKnight");
-        knight.embarkOnQuest();
-    }
-
     public static void main(String[] args) throws PerformanceException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-idol.xml");
-        Performer performer = (Performer) context.getBean("duke");
-        performer.perform();
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-idol-autowired.xml");
+        KnifeJuggler knifeJuggler = (KnifeJuggler) context.getBean("knifeJuggler");
+        knifeJuggler.showKives();
     }
 }
