@@ -1,10 +1,9 @@
 package com.dataart.retman.beans.impl.musical.instrument;
 
-import com.dataart.retman.beans.StringedInstrument;
-import com.dataart.retman.beans.impl.Instrument;
-@StringedInstrument
+import com.dataart.retman.beans.Instrument;
+
 public class Guitar implements Instrument{
     public void play() {
-        System.out.println("treen treen trreen");
+        System.out.println("treen treen treen");
     }
 }

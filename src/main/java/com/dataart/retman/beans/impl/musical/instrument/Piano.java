@@ -1,9 +1,9 @@
 package com.dataart.retman.beans.impl.musical.instrument;
 
-import com.dataart.retman.beans.impl.Instrument;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.dataart.retman.annotation.Key;
+import com.dataart.retman.beans.Instrument;
 
-@Qualifier("key")
+@Key
 public class Piano implements Instrument {
     public void play() {
         System.out.println("PLINK PLINK PLINK");
