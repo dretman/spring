@@ -5,9 +5,7 @@ import com.dataart.retman.beans.Instrument;
 import com.dataart.retman.beans.Performer;
 import com.dataart.retman.exception.PerformanceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component("eddie")
 public class Instrumentalist implements Performer {
     @Autowired
     @Key

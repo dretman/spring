@@ -1,18 +1,19 @@
 package com.dataart.retman.beans.impl;
 
+import com.dataart.retman.beans.Poem;
 import com.dataart.retman.exception.PerformanceException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class PoeticJaggler extends Juggler {
     private static final Log LOG = LogFactory.getLog(PoeticJaggler.class);
-    private Sonnet29 poem;
+    private Poem poem;
 
-    public PoeticJaggler(Sonnet29 poem) {
+    public PoeticJaggler(Poem poem) {
         this.poem = poem;
     }
 
-    public PoeticJaggler(int beanBags, Sonnet29 poem) {
+    public PoeticJaggler(int beanBags, Poem poem) {
         super(beanBags);
         this.poem = poem;
     }
