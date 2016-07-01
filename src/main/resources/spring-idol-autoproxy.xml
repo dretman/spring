@@ -15,4 +15,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="instrument" ref="saxophone"/>
     </bean>
 
+    <bean id="volunteer" class="com.dataart.retman.beans.impl.Volunteer"/>
+    <bean id="magician" class="com.dataart.retman.beans.impl.Magician"/>
+
+    <bean id="graciousContestant" class="com.dataart.retman.beans.impl.ContestantIntroducer"/>
+
 </beans>

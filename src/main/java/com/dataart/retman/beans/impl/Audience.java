@@ -34,6 +34,7 @@ public class Audience {
         System.out.println("The audience is demanding the refaund");
     }
 
+//    @Around("performance()")
     public void watchPerformance(ProceedingJoinPoint proceedingJoinPoint) {
         try {
             takeSeats();

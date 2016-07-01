@@ -1,5 +1,7 @@
 package com.dataart.retman.beans.impl;
 
+import com.dataart.retman.beans.Contestant;
+import com.dataart.retman.beans.Instrument;
 import com.dataart.retman.beans.Performer;
 import com.dataart.retman.exception.PerformanceException;
 import org.apache.commons.logging.Log;
@@ -16,7 +18,7 @@ public class Main {
 
 //        Audience audience = (Audience) context.getBean("audience");
         Performer kenny = (Performer) context.getBean("kenny");
-//        Instrument saxophone = (Instrument) context.getBean("saxophone");
+        Instrument saxophone = (Instrument) context.getBean("saxophone");
 
 //        Thinker volunteer = (Thinker) context.getBean("volunteer");
 //        MindReader magician = (MindReader) context.getBean("magician");
@@ -25,6 +27,6 @@ public class Main {
 //        System.out.println(magician.getThoughts());
 
         kenny.perform();
-
+        ((Contestant)kenny).receiveAward();
     }
 }
