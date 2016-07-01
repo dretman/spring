@@ -1,21 +1,22 @@
 package com.dataart.retman.beans.impl;
 
-import com.dataart.retman.annotation.Key;
 import com.dataart.retman.beans.Instrument;
 import com.dataart.retman.beans.Performer;
 import com.dataart.retman.exception.PerformanceException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Instrumentalist implements Performer {
-    @Autowired
-    @Key
     private Instrument instrument;
 
-    public void perform() throws PerformanceException {
+    public void perform() throws PerformanceException, InterruptedException {
         if (instrument == null) {
-            System.out.println("Without instrumen");
+            throw new PerformanceException();
         } else {
+//            Thread.sleep(2000);
             instrument.play();
         }
+    }
+
+    public void setInstrument(Instrument instrument) {
+        this.instrument = instrument;
     }
 }
