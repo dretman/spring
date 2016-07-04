@@ -1,4 +1,4 @@
-package com.dataart.retman.db;
+package com.dataart.retman;
 
 import com.dataart.retman.domain.User;
 import org.apache.commons.logging.Log;
@@ -6,8 +6,8 @@ import org.apache.commons.logging.LogFactory;
 
 import java.sql.*;
 
-public class Main {
-    private static final Log LOG = LogFactory.getLog(Main.class);
+public class Test {
+    private static final Log LOG = LogFactory.getLog(Test.class);
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_CONNECTION = "jdbc:h2:~/test";
     private static final String DB_USER = "SA";
