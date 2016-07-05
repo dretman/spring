@@ -1,5 +1,7 @@
-package com.dataart.retman.beans;
+package com.dataart.retman;
 
+import com.dataart.retman.beans.Performer;
+import com.dataart.retman.beans.Poem;
 import com.dataart.retman.beans.impl.PoeticJaggler;
 import com.dataart.retman.beans.impl.Sonnet29;
 import org.springframework.context.annotation.Bean;

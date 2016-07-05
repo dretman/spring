@@ -1,6 +1,6 @@
-package com.dataart.retman.beans.impl;
+package com.dataart.retman;
 
-import com.dataart.retman.beans.Performer;
+import com.dataart.retman.beans.Poem;
 import com.dataart.retman.exception.PerformanceException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) throws PerformanceException, InterruptedException {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-idol-aspectj-test.xml");
-        Performer denis = (Performer) context.getBean("denis");
-        denis.perform();
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-idol-component-scan.xml");
+        Poem poem = (Poem) context.getBean("sonnet29");
+        poem.recite();
     }
 }
