@@ -1,17 +1,29 @@
 package com.dataart.retman;
 
-import com.dataart.retman.db.dao.SpitterDAO;
+import com.dataart.retman.db.repository.SpitterRepository;
 import com.dataart.retman.domain.Spitter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        SpitterDAO spitterDao = (SpitterDAO) context.getBean("spitterDao");
-        Spitter spitter = spitterDao.getSpitterById(1);
-        System.out.println(spitter);
-//        User user = (User) context.getBean("user");
-//        System.out.println(user);
+    public static void main(String[] args) throws SQLException {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context-component-scan.xml");
+        SpitterRepository spitterRepository = (SpitterRepository) context.getBean("spitterRepositoryImpl");
+        spitterRepository.addSpitter(createSpitter());
+    }
+
+    private static Spitter createSpitter() {
+        Spitter spitter = new Spitter();
+
+        spitter.setId(13);
+        spitter.setUsername("toxa");
+        spitter.setPassword("toxa1986");
+        spitter.setFullName("Anton Kucin");
+        spitter.setEmail("antonkucin@gmail.com");
+        spitter.setUpdatedById(false);
+
+        return spitter;
     }
 }
