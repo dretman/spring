@@ -8,6 +8,18 @@ public class Spitter {
     private String email;
     private boolean isUpdatedById;
 
+    public Spitter() {
+    }
+
+    public Spitter(long id, String username, String password, String fullName, String email, boolean isUpdatedById) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.isUpdatedById = isUpdatedById;
+    }
+
     public long getId() {
         return id;
     }

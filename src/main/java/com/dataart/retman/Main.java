@@ -11,7 +11,10 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context-component-scan.xml");
         SpitterRepository spitterRepository = (SpitterRepository) context.getBean("spitterRepositoryImpl");
-        spitterRepository.addSpitter(createSpitter());
+        Spitter spitter = createSpitter();
+
+//        spitterRepository.addSpitter(spitter);
+        System.out.println(spitterRepository.retrieveSpitterById(spitter.getId()));
     }
 
     private static Spitter createSpitter() {

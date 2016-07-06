@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SpitterRepositoryImpl implements SpitterRepository {
     private static final String SQL_INSERT_SPITTER = "INSERT INTO SPITTERS (ID, USERNAME, PASSWORD, FULLNAME, EMAIL, ISUPDATEDBYEMAIL) VALUES (?,?,?,?,?,?)";
+    private static final String SQL_GET_SPITTER_BY_ID = "SELECT * FROM SPITTERS where id=?";
     private JdbcOperations jdbcOperations;
 
     @Autowired
@@ -24,5 +25,21 @@ public class SpitterRepositoryImpl implements SpitterRepository {
                 spitter.getFullName(),
                 spitter.getEmail(),
                 spitter.isUpdatedById());
+    }
+
+    public Spitter retrieveSpitterById(long id) {
+        return jdbcOperations.queryForObject(SQL_GET_SPITTER_BY_ID,
+
+                (rs, rowNum) -> {
+                    return new Spitter(
+                            rs.getLong("ID"),
+                            rs.getString("USERNAME"),
+                            rs.getString("PASSWORD"),
+                            rs.getString("FULLNAME"),
+                            rs.getString("EMAIL"),
+                            rs.getBoolean("ISUPDATEDBYEMAIL"));
+                }
+                , id);
+
     }
 }
