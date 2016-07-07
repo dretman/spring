@@ -20,6 +20,8 @@ public class Spitter {
         this.isUpdatedById = isUpdatedById;
     }
 
+
+
     public long getId() {
         return id;
     }
@@ -40,7 +42,7 @@ public class Spitter {
         return email;
     }
 
-    public boolean isUpdatedById() {
+    public boolean getIsUpdatedById() {
         return isUpdatedById;
     }
 
@@ -64,7 +66,7 @@ public class Spitter {
         this.email = email;
     }
 
-    public void setUpdatedById(boolean updatedById) {
+    public void setIsUpdatedById(boolean updatedById) {
         isUpdatedById = updatedById;
     }
 
