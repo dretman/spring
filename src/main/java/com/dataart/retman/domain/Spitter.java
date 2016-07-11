@@ -1,5 +1,8 @@
 package com.dataart.retman.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Spitter {
     private long id;
     private String username;
@@ -20,28 +23,33 @@ public class Spitter {
         this.isUpdatedById = isUpdatedById;
     }
 
-
-
+    @Id
+    @Column(name = "ID")
     public long getId() {
         return id;
     }
 
+    @Column(name = "USERNAME")
     public String getUsername() {
         return username;
     }
 
+    @Column(name = "PASSWORD")
     public String getPassword() {
         return password;
     }
 
+    @Column(name = "FULLNAME")
     public String getFullName() {
         return fullName;
     }
 
+    @Column(name = "EMAIL")
     public String getEmail() {
         return email;
     }
 
+    @Column(name = "ISUPDATEDBYID")
     public boolean getIsUpdatedById() {
         return isUpdatedById;
     }
