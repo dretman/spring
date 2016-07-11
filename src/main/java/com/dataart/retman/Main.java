@@ -13,14 +13,8 @@ public class Main {
 
         SpitterContainer spitterContainer = (SpitterContainer) context.getBean("spitterContainer");
         Spitter spitter = spitterContainer.getSpitter();
-        spitter.setId(1);
-
 //        spitterRepository.addSpitter(spitter);
-//        System.out.println(spitterRepository.getSpitterById(spitter.getId()));
-        System.out.println(spitter);
-//        spitterRepository.deleteSpitter(spitter);
-        System.out.println(spitterRepository.contains(spitter));
-        spitterRepository.saveSpitter(spitter);
-        System.out.println(spitterRepository.contains(spitter));
+        spitterRepository.deleteSpitter(spitter);
+
     }
 }

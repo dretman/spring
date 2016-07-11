@@ -5,46 +5,38 @@ import com.dataart.retman.repository.SpitterRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Repository
 @Transactional
 public class JpaSpitterRepository implements SpitterRepository {
 
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void addSpitter(Spitter spitter) {
-        entityManagerFactory.createEntityManager().persist(spitter);
+        entityManager.persist(spitter);
     }
 
     @Override
     public Spitter getSpitterById(long id) {
-        return entityManagerFactory.createEntityManager().find(Spitter.class, id);
+        return entityManager.find(Spitter.class, id);
     }
 
     @Override
     public void saveSpitter(Spitter spitter) {
-        entityManagerFactory.createEntityManager().merge(spitter);
+        entityManager.merge(spitter);
     }
 
     @Override
     public void deleteSpitter(Spitter spitter) {
-        entityManagerFactory.createEntityManager().remove(spitter);
-    }
-
-    public EntityManagerFactory getEntityManagerFactory() {
-        return entityManagerFactory;
-    }
-
-    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+        entityManager.remove(entityManager.find(Spitter.class, spitter.getId()));
     }
 
     public boolean contains(Spitter spitter) {
-        return entityManagerFactory.createEntityManager().contains(spitter);
+        return entityManager.contains(spitter);
     }
 
 
