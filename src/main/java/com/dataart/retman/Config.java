@@ -5,6 +5,7 @@ import com.dataart.retman.domain.SpitterContainer;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.dataart.retman")
 public class Config {
 
     @Bean
@@ -61,7 +63,7 @@ public class Config {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
         factoryBean.setDataSource(dataSource());

@@ -9,12 +9,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        SpitterRepository spitterRepository = (SpitterRepository) context.getBean("jpaSpitterRepository");
+        SpitterRepository spitterRepository = (SpitterRepository) context.getBean("spitterRepository");
 
         SpitterContainer spitterContainer = (SpitterContainer) context.getBean("spitterContainer");
         Spitter spitter = spitterContainer.getSpitter();
-        spitter.setId(3);
-        spitterRepository.deleteSpitter(spitter);
-
+//        spitter.setId(3);
+        System.out.println("----------------------------------");
+        System.out.println(spitterRepository.findByUsername("disa"));
     }
 }
