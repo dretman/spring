@@ -13,8 +13,9 @@ public class Main {
 
         SpitterContainer spitterContainer = (SpitterContainer) context.getBean("spitterContainer");
         Spitter spitter = spitterContainer.getSpitter();
-//        spitter.setId(3);
         System.out.println("----------------------------------");
-        System.out.println(spitterRepository.findByUsername("disa"));
+
+        for (Spitter spitter1 : spitterRepository.findAllGmailSpitters())
+            System.out.println(spitter1);
     }
 }
