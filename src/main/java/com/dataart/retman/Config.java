@@ -40,7 +40,7 @@ public class Config {
 
     @Bean
     public Spitter retrieveSpitter() {
-        return new Spitter(13, "disa", "disa1953", "Denis Retman", "denisretman@gmail.com", false);
+        return new Spitter(0, "disa", "disa1953", "Denis Retman", "denisretman@gmail.com", false);
     }
 
     @Bean
