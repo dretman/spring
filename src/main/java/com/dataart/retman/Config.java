@@ -2,9 +2,15 @@ package com.dataart.retman;
 
 import com.dataart.retman.domain.Spitter;
 import com.dataart.retman.domain.SpitterContainer;
+import net.sf.ehcache.CacheManager;
 import org.apache.commons.dbcp.BasicDataSource;
+
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,6 +25,7 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.dataart.retman")
+@EnableCaching
 public class Config {
 
     @Bean
@@ -42,7 +49,7 @@ public class Config {
 
     @Bean
     public Spitter retrieveSpitter() {
-        return new Spitter(0, "disa", "disa1953", "Denis Retman", "denisretman@mail.com", false);
+        return new Spitter(0, "disa", "disa1953", "Denis Retman", "denisretman@gmail.com", false);
     }
 
     @Bean
@@ -73,5 +80,16 @@ public class Config {
         return factoryBean;
     }
 
+    @Bean
+    public EhCacheCacheManager cacheManager(CacheManager cacheManager) {
+        return new EhCacheCacheManager(cacheManager);
+    }
+
+    @Bean
+    public EhCacheManagerFactoryBean ehcache() {
+        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+        ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
+        return ehCacheManagerFactoryBean;
+    }
 
 }
