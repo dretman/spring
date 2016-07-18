@@ -40,7 +40,7 @@ public class HomeControllerTest {
 
     @Test
     public void shouldShowRecentSpittles() throws Exception {
-        int listSize = 10;
+        int listSize = 20;
         List<Spittle> expectedSpittleList = SpittleGenerator.generateSpittleList(listSize);
 
         SpittleRepository spittleRepositoryMOCK = Mockito.mock(SpittleRepository.class);
@@ -73,6 +73,23 @@ public class HomeControllerTest {
                 .andExpect(view().name("spittles"))
                 .andExpect(model().attributeExists("spittleList"))
                 .andExpect(model().attribute("spittleList", hasItems(expectedSpittleList.toArray())));
+
+    }
+
+    @Test
+    public void testSpittle() throws Exception {
+        Spittle expectedSpittle = SpittleGenerator.generateSpittleList(1).get(0);
+
+        SpittleRepository spittleRepositoryMOCK = Mockito.mock(SpittleRepository.class);
+        Mockito.when(spittleRepositoryMOCK.findOne(12345)).thenReturn(expectedSpittle);
+
+        SpittleController spittleController = new SpittleController(spittleRepositoryMOCK);
+
+        MockMvc mockMvc = standaloneSetup(spittleController).build();
+        mockMvc.perform((get("/spittles/12345")))
+                .andExpect(view().name("spittle"))
+                .andExpect(model().attributeExists("spittle"))
+                .andExpect(model().attribute("spittle", expectedSpittle));
 
     }
 

@@ -10,4 +10,8 @@ public class SpittleRepositoryImpl implements SpittleRepository {
     public List<Spittle> findSpittles(long max, int count) {
         return SpittleGenerator.generateSpittleList(count);
     }
+
+    public Spittle findOne(long spittleId) {
+        return SpittleGenerator.generateSpittleList(1).get(0);
+    }
 }
