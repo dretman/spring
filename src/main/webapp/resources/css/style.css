@@ -1,0 +1,17 @@
+body {
+    background-color: aliceblue;
+}
+
+.spittleMessage {
+    font-family: "Arial Black";
+    font-size: x-large;
+}
+
+.spittleTime {
+    font-family: FangSong;
+    color: wheat;
+}
+
+.spittleLocation {
+    font-size: x-small;
+}
