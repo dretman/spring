@@ -58,6 +58,24 @@ public class HomeControllerTest {
 //        assertThat(resultSpittleList, IsIterableContainingInOrder.contains(expectedSpittleList.toArray()));
     }
 
+    @Test
+    public void shouldShowPagedSpittles() throws Exception {
+        int listSize = 10;
+        List<Spittle> expectedSpittleList = SpittleGenerator.generateSpittleList(listSize);
+
+        SpittleRepository spittleRepositoryMOCK = Mockito.mock(SpittleRepository.class);
+        Mockito.when(spittleRepositoryMOCK.findSpittles(238900, 50)).thenReturn(expectedSpittleList);
+
+        SpittleController spittleController = new SpittleController(spittleRepositoryMOCK);
+
+        MockMvc mockMvc = standaloneSetup(spittleController).setSingleView(new InternalResourceView("WEB-INF/view/spittles.jsp")).build();
+        mockMvc.perform((get("/spittles?max=238900&count=50")))
+                .andExpect(view().name("spittles"))
+                .andExpect(model().attributeExists("spittleList"))
+                .andExpect(model().attribute("spittleList", hasItems(expectedSpittleList.toArray())));
+
+    }
+
     private void showList(List tList) {
         for (Object t : tList)
             System.out.println(t);
