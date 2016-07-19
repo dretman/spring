@@ -24,6 +24,11 @@ public class TestController {
         return "404";
     }
 
+    @RequestMapping(value = {"/500"}, method = RequestMethod.GET)
+    public String ServerError() {
+        return "500";
+    }
+
     private int getRandom404Pic() {
         List<Integer> list = Arrays.asList(4040, 4041, 4042, 4043);
         return list.get((int) (Math.random() * 4));

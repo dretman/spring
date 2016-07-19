@@ -1,6 +1,8 @@
 package com.dataart.retman;
 
+import com.dataart.retman.repository.SpitterRepository;
 import com.dataart.retman.repository.SpittleRepository;
+import com.dataart.retman.repository.impl.SpitterRepositoryImpl;
 import com.dataart.retman.repository.impl.SpittleRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +18,11 @@ public class RootConfig {
     @Bean
     public SpittleRepository spittleRepository() {
         return new SpittleRepositoryImpl();
+    }
+
+    @Bean
+    public SpitterRepository spitterRepository() {
+        return new SpitterRepositoryImpl();
     }
 
 }
