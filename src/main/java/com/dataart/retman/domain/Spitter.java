@@ -1,10 +1,25 @@
 package com.dataart.retman.domain;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Spitter {
     private long id;
+
+    @NotNull
+    @Size(min = 5, max = 16)
     private String firstName;
+
+    @NotNull
+    @Size(min = 5, max = 25)
     private String lastName;
+
+    @NotNull
+    @Size(min = 4, max = 30)
     private String username;
+
+    @NotNull
+    @Size(min = 5, max = 16)
     private String password;
 
     public Spitter() {
