@@ -1,5 +1,7 @@
 package com.dataart.retman.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -7,18 +9,22 @@ public class Spitter {
     private long id;
 
     @NotNull
+    @NotBlank
     @Size(min = 5, max = 16)
     private String firstName;
 
     @NotNull
+    @NotBlank
     @Size(min = 5, max = 25)
     private String lastName;
 
     @NotNull
+    @NotBlank
     @Size(min = 4, max = 30)
     private String username;
 
     @NotNull
+    @NotBlank
     @Size(min = 5, max = 16)
     private String password;
 
@@ -26,10 +32,10 @@ public class Spitter {
     }
 
     public Spitter(String firstName, String lastName, String username, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
+        this.username = username.trim();
+        this.password = password.trim();
     }
 
     public Spitter(long id, String firstName, String lastName, String username, String password) {

@@ -15,3 +15,7 @@ body {
 .spittleLocation {
     font-size: x-small;
 }
+
+span.error {
+    color: red;
+}
