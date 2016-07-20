@@ -1,14 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Register</title>
-    <link href="<c:out value="/resources/css/style.css"/>" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-
 <div id="registrationForm">
 
 <strong>Register Form</strong>
@@ -66,6 +58,3 @@
 </sf:form>
 
 </div>
-
-</body>
-</html>

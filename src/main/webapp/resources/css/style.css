@@ -33,14 +33,14 @@ input.error {
     background-color: #ffcccc;
 }
 
-#registrationForm {
-    color: grey;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -285px;
-    margin-top: -190px;
-}
+/*#registrationForm {*/
+    /*color: grey;*/
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*margin-left: -285px;*/
+    /*margin-top: -190px;*/
+/*}*/
 
 table {
     border: 3px solid gainsboro;
