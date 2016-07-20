@@ -15,7 +15,9 @@ public class SpitterRepositoryImpl implements SpitterRepository {
     private File dbFile;
 
     public SpitterRepositoryImpl() {
-        File file = new File("db");
+        String folderName = "db";
+        removeFolder(folderName);
+        File file = new File(folderName);
         file.mkdir();
         dbFile = new File("db/repo.txt");
         try {
@@ -27,7 +29,7 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 
     public Spitter save(Spitter spitter) {
         try {
-            FileUtils.writeStringToFile(dbFile, spitter.toString(), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(dbFile, spitter.toString(), Charset.defaultCharset(), false);
         } catch (IOException e) {
             LOG.error("Error while creation saving", e);
         }
@@ -46,10 +48,17 @@ public class SpitterRepositoryImpl implements SpitterRepository {
         return spitter;
     }
 
-    public static void main(String[] args) throws IOException {
-        Spitter spitter = new Spitter(13, "Denis", "Retman", "disa", "12345");
-        SpitterRepository spitterRepository = new SpitterRepositoryImpl();
-//        System.out.println(spitterRepository.save(spitter));
-        System.out.println(spitterRepository.findByUsername("dd").getFirstName());
+    public void removeFolder(String folderName) {
+        File folder = new File(folderName);
+        System.out.println(folder.isDirectory());
+        if (folder.isDirectory()) {
+            String[] fileArr = folder.list();
+            for (String fileName : fileArr) {
+                System.out.println(fileName);
+                File fileToDelete = new File(folderName + "/" + fileName);
+                fileToDelete.delete();
+            }
+        }
+        folder.delete();
     }
 }

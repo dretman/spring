@@ -19,3 +19,35 @@ body {
 span.error {
     color: red;
 }
+
+label.error {
+    color: red;
+}
+
+div.error {
+    background-color: #ffcccc;
+    border: 2px solid red;
+}
+
+input.error {
+    background-color: #ffcccc;
+}
+
+#registrationForm {
+    color: grey;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -285px;
+    margin-top: -190px;
+}
+
+table {
+    border: 3px solid gainsboro;
+    margin: 5px;
+    padding: 5px;
+}
+
+tr.border_bottom td {
+    border-bottom: 2pt solid darkgray;
+}

@@ -9,23 +9,23 @@ public class Spitter {
     private long id;
 
     @NotNull
-    @NotBlank
-    @Size(min = 5, max = 16)
+    @NotBlank(message = "{firstName.blank}")
+    @Size(min = 5, max = 16, message = "{firstName.size}")
     private String firstName;
 
     @NotNull
     @NotBlank
-    @Size(min = 5, max = 25)
+    @Size(min = 5, max = 25, message = "{lastName.size}")
     private String lastName;
 
     @NotNull
     @NotBlank
-    @Size(min = 4, max = 30)
+    @Size(min = 4, max = 30, message = "{username.size}")
     private String username;
 
     @NotNull
     @NotBlank
-    @Size(min = 5, max = 16)
+    @Size(min = 5, max = 16, message = "{password.size}")
     private String password;
 
     public Spitter() {
@@ -106,5 +106,12 @@ public class Spitter {
                 + lastName + "|"
                 + username + "|"
                 + password;
+    }
+
+    public static void main(String[] args) {
+        String strClassPath = System.getProperty("java.class.path");
+
+        System.out.println("Classpath is " + strClassPath);
+
     }
 }
