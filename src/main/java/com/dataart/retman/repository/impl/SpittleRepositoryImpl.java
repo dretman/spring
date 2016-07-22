@@ -12,6 +12,8 @@ public class SpittleRepositoryImpl implements SpittleRepository {
     }
 
     public Spittle findOne(long spittleId) {
+        if (spittleId == 13)
+            return null;
         return SpittleGenerator.generateSpittleList(1).get(0);
     }
 }

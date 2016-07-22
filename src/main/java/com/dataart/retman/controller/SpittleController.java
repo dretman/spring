@@ -1,6 +1,7 @@
 package com.dataart.retman.controller;
 
 import com.dataart.retman.domain.Spittle;
+import com.dataart.retman.exception.SpittleNotFoundException;
 import com.dataart.retman.repository.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,13 @@ public class SpittleController {
     ) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("spittle");
-        modelAndView.addObject("spittle", spittleRepository.findOne(spittleId));
+
+        Spittle spittle = spittleRepository.findOne(spittleId);
+        if (spittle == null) {
+            throw new SpittleNotFoundException();
+        }
+
+        modelAndView.addObject("spittle", spittle);
         return modelAndView;
     }
 
