@@ -1,6 +1,7 @@
 package com.dataart.retman.controller;
 
 import com.dataart.retman.domain.Spittle;
+import com.dataart.retman.exception.DublicateSpittleMessageException;
 import com.dataart.retman.exception.SpittleNotFoundException;
 import com.dataart.retman.repository.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -50,6 +52,24 @@ public class SpittleController {
 
         modelAndView.addObject("spittle", spittle);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/spittle", method = RequestMethod.GET)
+    public String showSpittleForm(Model model) {
+        model.addAttribute("spittle", new Spittle());
+        return "addSpittle";
+    }
+
+    @RequestMapping(value = "/spittle", method = RequestMethod.POST)
+    public String addSpittle(Spittle spittle, RedirectAttributes model) throws DublicateSpittleMessageException {
+        try {
+            spittleRepository.save(spittle);
+        } catch (DublicateSpittleMessageException e) {
+            model.addFlashAttribute(spittle);
+            return "redirect:/duplicate";
+        }
+
+        return "addSpittle";
     }
 
 }

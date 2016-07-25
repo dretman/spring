@@ -22,4 +22,13 @@
     <definition name="spittle" extends="base">
         <put-attribute name="body" value="/WEB-INF/layout/spittle.jsp"/>
     </definition>
+    <definition name="addSpittle" extends="base">
+        <put-attribute name="body" value="/WEB-INF/layout/addSpittle.jsp"/>
+    </definition>
+    <definition name="duplicate" extends="base">
+        <put-attribute name="body" value="/WEB-INF/layout/duplicate.jsp"/>
+    </definition>
+    <definition name="404" extends="base">
+        <put-attribute name="body" value="/WEB-INF/layout/404.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -3,6 +3,7 @@
 <%@ page session="false" %>
 
 <s:url value="/spitter/register" var="registerUrl"/>
+<s:url value="/spittles/spittle" var="addSpittelUrl"/>
 <s:url value="/spittles" var="spittlesUrl">
     <s:param name="count" value="3"/>
 </s:url>
@@ -14,6 +15,7 @@
 <h1><s:message code="spittr.welcome"/></h1>
 
 <a href="${spittlesUrl}">Spittles</a> |
+<a href="${addSpittelUrl}">Add Spittle</a> |
 <a href="${registerUrl}">Register</a> |
 <a href="${spitterProfileUrl}">User profile</a>
 <br>

@@ -10,21 +10,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-public class SpitterRepositoryImpl implements SpitterRepository {
+public class SpitterRepositoryImpl extends Repository implements SpitterRepository {
     private static final Log LOG = LogFactory.getLog(SpitterRepositoryImpl.class);
     private File dbFile;
 
     public SpitterRepositoryImpl() {
-        String folderName = "db";
-        removeFolder(folderName);
-        File file = new File(folderName);
-        file.mkdir();
-        dbFile = new File("db/repo.txt");
-        try {
-            dbFile.createNewFile();
-        } catch (IOException e) {
-            LOG.error("Error while creation  repo.txt", e);
-        }
+        dbFile = createRepoFile("spitterRepoFile");
     }
 
     public Spitter save(Spitter spitter) {
@@ -48,17 +39,8 @@ public class SpitterRepositoryImpl implements SpitterRepository {
         return spitter;
     }
 
-    public void removeFolder(String folderName) {
-        File folder = new File(folderName);
-        System.out.println(folder.isDirectory());
-        if (folder.isDirectory()) {
-            String[] fileArr = folder.list();
-            for (String fileName : fileArr) {
-                System.out.println(fileName);
-                File fileToDelete = new File(folderName + "/" + fileName);
-                fileToDelete.delete();
-            }
-        }
-        folder.delete();
+    public static void main(String[] args) {
+        new SpitterRepositoryImpl();
     }
+
 }

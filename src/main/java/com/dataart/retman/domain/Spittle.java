@@ -6,11 +6,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.Date;
 
 public class Spittle {
-    private final Long id;
-    private final String message;
-    private final Date time;
+    private Long id;
+    private String message;
+    private Date time;
     private Double latitude;
     private Double longitude;
+
+    public Spittle() {
+    }
 
     public Spittle(String message, Date time) {
         this(message, time, null, null);
@@ -21,6 +24,26 @@ public class Spittle {
         this.message = message;
         this.time = time;
         this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -56,12 +79,11 @@ public class Spittle {
 
     @Override
     public String toString() {
-        return "Spittle{" +
-                "id=" + id +
-                ", message='" + message + '\'' +
-                ", time=" + time +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
+        return
+                id + "|" +
+                        message + "|" +
+                        time + "|" +
+                        latitude + "|" +
+                        longitude + "\n";
     }
 }
