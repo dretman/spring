@@ -23,9 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/spitter/**").hasRole(USER)
                 .antMatchers(HttpMethod.POST, "/spittles/**").hasRole(ADMIN)
-                .anyRequest().permitAll()
+//                .anyRequest().permitAll();
 //                .and()
 //                .requiresChannel().antMatchers("/spittles/**").requiresSecure()
-                .and().formLogin().loginPage("/loginForm");
+                .and().formLogin().loginPage("/loginForm")
+                .and().logout().logoutUrl("/logoutUrl").logoutSuccessUrl("/");
     }
 }

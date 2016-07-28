@@ -26,4 +26,14 @@ public class HomeController {
         model.addAttribute("message", "Duplicate value:");
         return "duplicate";
     }
+
+//    @RequestMapping(value="/logoutUrl", method = RequestMethod.GET)
+//    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null){
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        return "redirect:/homePage";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+//    }
+
 }
