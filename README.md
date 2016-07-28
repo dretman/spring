@@ -1,0 +1,2 @@
+JETTY MAVEN PLUGIN http://www.eclipse.org/jetty/documentation/9.3.0.v20150612/jetty-maven-plugin.html#get-up-and-running
+Configure HTTPS for jetty-maven-plugin 9.0.x http://juplo.de/configure-https-for-jetty-maven-plugin-9-0-x/
