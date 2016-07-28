@@ -14,6 +14,13 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "/loginForm", method = RequestMethod.GET)
+    public String login(Model model) {
+//        model.addAttribute("login", new LoginForm());
+        return "login";
+    }
+
+
     @RequestMapping(value = "duplicate", method = RequestMethod.GET)
     public String duplicate(Model model) {
         model.addAttribute("message", "Duplicate value:");
