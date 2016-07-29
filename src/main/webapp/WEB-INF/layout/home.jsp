@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <%@ page session="false" %>
 
 <s:url value="/spitter/register" var="registerUrl"/>
@@ -22,3 +24,7 @@
 <s:escapeBody htmlEscape="true">
     <h1>Hello World</h1>
 </s:escapeBody>
+
+<security:authorize access="hasRole('SECRET_ROLE')">
+    <img src="<c:url value="/resources/pic/java-100432255-primary.idge.jpg"/>">
+</security:authorize>

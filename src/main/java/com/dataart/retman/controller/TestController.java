@@ -33,4 +33,9 @@ public class TestController {
         List<Integer> list = Arrays.asList(4040, 4041, 4042, 4043);
         return list.get((int) (Math.random() * 4));
     }
+
+    @RequestMapping(value = "/picture", method = RequestMethod.GET)
+    public String picture() {
+        return "picture";
+    }
 }

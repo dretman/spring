@@ -34,4 +34,7 @@
     <definition name="login" extends="base">
         <put-attribute name="body" value="/WEB-INF/layout/login.jsp"/>
     </definition>
+    <definition name="picture" extends="base">
+        <put-attribute name="body" value="/WEB-INF/layout/picture.jsp"/>
+    </definition>
 </tiles-definitions>
