@@ -6,11 +6,12 @@
 <%----%>
 <%--</c:if>--%>
 
-<security:authorize access="isAuthenticated() and principal.username=='habuma'">
+<security:authorize url="/picture">
+    <c:url value="/picture" var="pic"/>
     <security:authentication property="principal" var="principal"/>
     <h3>Hello <c:out value="${principal.username}"/></h3>
     <p>
-        <a href="/picture">Link to the pic</a>
+        <a href="${pic}">Link to the pic</a>
     </p>
 </security:authorize>
 
