@@ -2,10 +2,9 @@ package com.dataart.retman.controller;
 
 import com.dataart.retman.domain.Spittle;
 import com.dataart.retman.exception.DublicateSpittleMessageException;
+import com.dataart.retman.exception.SpittleNotFoundException;
 import com.dataart.retman.repository.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,12 +37,14 @@ public class SpittleController {
     }
 
     @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
-    public ResponseEntity<Spittle> spittle(
+    public Spittle spittle(
             @PathVariable(value = "spittleId") long spittleId
     ) {
         Spittle spittle = spittleRepository.findOne(spittleId);
-        HttpStatus status = spittle == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
-        return new ResponseEntity<Spittle>(spittle, status);
+        if (spittle == null) {
+            throw new SpittleNotFoundException(spittleId);
+        }
+        return spittle;
     }
 
     @RequestMapping(value = "/spittle", method = RequestMethod.GET)
