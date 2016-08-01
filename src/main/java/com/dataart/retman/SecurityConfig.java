@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/spittles/**").hasRole(USER)
+        http.authorizeRequests().antMatchers("/spitter/**").hasRole(USER)
                 .antMatchers("/picture").access("isAuthenticated() and principal.username=='habuma'")
 //                .antMatchers(HttpMethod.POST, "/spittles/**").hasRole(ADMIN)
 //                .anyRequest().permitAll();
@@ -32,5 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .requiresChannel().antMatchers("/spittles/**").requiresSecure()
                 .and().formLogin().loginPage("/loginForm")
                 .and().logout().logoutUrl("/logoutUrl").logoutSuccessUrl("/");
+        http.csrf().disable();
     }
 }

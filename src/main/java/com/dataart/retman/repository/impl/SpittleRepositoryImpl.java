@@ -11,8 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class SpittleRepositoryImpl extends Repository implements SpittleRepository {
     private static final Log LOG = LogFactory.getLog(SpitterRepositoryImpl.class);
@@ -35,6 +35,9 @@ public class SpittleRepositoryImpl extends Repository implements SpittleReposito
 
     public Spittle save(Spittle spittle) throws DublicateSpittleMessageException {
         try {
+            Random random = new Random();
+            spittle.setId((long)(random.nextInt(15)));
+
             List<String> list = FileUtils.readLines(dbFile, Charset.defaultCharset());
             for (String s : list) {
                 if (spittle.getMessage().equals(s.split("\\|")[1])) {
@@ -51,9 +54,7 @@ public class SpittleRepositoryImpl extends Repository implements SpittleReposito
     }
 
     public static void main(String[] args) throws DublicateSpittleMessageException {
-        SpittleRepository spittleRepository = new SpittleRepositoryImpl();
-        Spittle spittle = new Spittle("rjramomyhj13", new Date());
-        spittleRepository.save(spittle);
+
     }
 
 }

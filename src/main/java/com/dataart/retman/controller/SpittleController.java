@@ -5,10 +5,13 @@ import com.dataart.retman.exception.DublicateSpittleMessageException;
 import com.dataart.retman.exception.SpittleNotFoundException;
 import com.dataart.retman.repository.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -54,15 +57,16 @@ public class SpittleController {
     }
 
     @RequestMapping(value = "/spittle", method = RequestMethod.POST)
-    public String addSpittle(Spittle spittle, RedirectAttributes model) throws DublicateSpittleMessageException {
-        try {
-            spittleRepository.save(spittle);
-        } catch (DublicateSpittleMessageException e) {
-            model.addFlashAttribute(spittle);
-            return "redirect:/duplicate";
-        }
+    public ResponseEntity<Spittle> addSpittle(@RequestBody Spittle spittle) throws DublicateSpittleMessageException {
 
-        return "addSpittle";
+        Spittle spittleRes = spittleRepository.save(spittle);
+        HttpHeaders headers = new HttpHeaders();
+        URI uri = URI.create("http://localhost:1717/spittles/" + 666);
+        headers.setLocation(uri);
+
+        ResponseEntity<Spittle> entity = new ResponseEntity<Spittle>(spittle, headers, HttpStatus.CREATED);
+
+        return entity;
     }
 
 }

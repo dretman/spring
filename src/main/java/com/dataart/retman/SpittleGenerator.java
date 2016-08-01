@@ -17,7 +17,7 @@ public class SpittleGenerator {
         Person person = fairy.person();
         TextProducer textProducer = fairy.textProducer();
 
-        return new Spittle(textProducer.randomString(10), fairy.person().dateOfBirth().toDate(), random.nextDouble(), random.nextDouble());
+        return new Spittle(textProducer.randomString(10), random.nextDouble(), random.nextDouble());
     }
 
     public static List<Spittle> generateSpittleList(int listSize) {
