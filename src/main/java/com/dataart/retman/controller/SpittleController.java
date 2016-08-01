@@ -2,18 +2,17 @@ package com.dataart.retman.controller;
 
 import com.dataart.retman.domain.Spittle;
 import com.dataart.retman.exception.DublicateSpittleMessageException;
-import com.dataart.retman.exception.SpittleNotFoundException;
 import com.dataart.retman.repository.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "/spittles")
 public class SpittleController {
     private static final String MAX_LONG_AS_STRING = Long.toString(Long.MAX_VALUE);
@@ -25,7 +24,9 @@ public class SpittleController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<Spittle> spittles(
+    public
+    @ResponseBody
+    List<Spittle> spittles(
             @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
             @RequestParam(value = "count", defaultValue = "20") int count,
             Model model
@@ -37,19 +38,12 @@ public class SpittleController {
     }
 
     @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
-    public ModelAndView spittle(
+    public ResponseEntity<Spittle> spittle(
             @PathVariable(value = "spittleId") long spittleId
     ) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("spittle");
-
         Spittle spittle = spittleRepository.findOne(spittleId);
-        if (spittle == null) {
-            throw new SpittleNotFoundException();
-        }
-
-        modelAndView.addObject("spittle", spittle);
-        return modelAndView;
+        HttpStatus status = spittle == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        return new ResponseEntity<Spittle>(spittle, status);
     }
 
     @RequestMapping(value = "/spittle", method = RequestMethod.GET)
