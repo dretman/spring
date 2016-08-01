@@ -4,9 +4,10 @@ import com.dataart.retman.error.Error;
 import com.dataart.retman.exception.DublicateSpittleMessageException;
 import com.dataart.retman.exception.SpittleNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.NestedServletException;
 
 @ControllerAdvice
@@ -25,9 +26,9 @@ public class AdviceController {
     }
 
     @ExceptionHandler(SpittleNotFoundException.class)
-    public ResponseEntity<Error> spittleNotFoundHandler(SpittleNotFoundException e){
-        Error error = new Error(4, "Spittle with id [" + e.getSpittleId() + "] not found");
-        return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public @ResponseBody Error spittleNotFoundHandler(SpittleNotFoundException e){
+        return new Error(4, "Spittle with id [" + e.getSpittleId() + "] really © not found");
     }
 
 }
