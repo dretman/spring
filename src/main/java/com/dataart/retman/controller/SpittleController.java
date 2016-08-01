@@ -7,10 +7,7 @@ import com.dataart.retman.repository.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,14 +25,15 @@ public class SpittleController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String spittles(
+    public @ResponseBody List<Spittle> spittles(
             @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
             @RequestParam(value = "count", defaultValue = "20") int count,
             Model model
     ) {
         List<Spittle> spittleList = spittleRepository.findSpittles(max, count);
         model.addAttribute("spittleList", spittleList);
-        return "spittles";
+
+        return spittleList;
     }
 
     @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
