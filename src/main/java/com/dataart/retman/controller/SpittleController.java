@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class SpittleController {
             @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
             @RequestParam(value = "count", defaultValue = "20") int count,
             Model model
-    ) {
+    ) throws IOException {
         List<Spittle> spittleList = spittleRepository.findSpittles(max, count);
         model.addAttribute("spittleList", spittleList);
 
@@ -56,13 +58,14 @@ public class SpittleController {
         return "addSpittle";
     }
 
-    @RequestMapping(value = "/spittle", method = RequestMethod.POST)
-    public ResponseEntity<Spittle> addSpittle(@RequestBody Spittle spittle) throws DublicateSpittleMessageException {
+    @RequestMapping(value = "/spittle", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<Spittle> addSpittle(@RequestBody Spittle spittle, UriComponentsBuilder builder) throws DublicateSpittleMessageException {
 
         Spittle spittleRes = spittleRepository.save(spittle);
         HttpHeaders headers = new HttpHeaders();
-        URI uri = URI.create("http://localhost:1717/spittles/" + 666);
-        headers.setLocation(uri);
+        URI uri = URI.create("http://localhost:1717/spittles/" + spittleRes.getId());
+        URI locationUri = builder.path("/spittles/").path(String.valueOf(spittle.getId())).build().toUri();
+        headers.setLocation(locationUri);
 
         ResponseEntity<Spittle> entity = new ResponseEntity<Spittle>(spittle, headers, HttpStatus.CREATED);
 

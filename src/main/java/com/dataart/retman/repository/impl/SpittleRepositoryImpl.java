@@ -11,8 +11,10 @@ import org.apache.commons.logging.LogFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Random;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class SpittleRepositoryImpl extends Repository implements SpittleRepository {
     private static final Log LOG = LogFactory.getLog(SpitterRepositoryImpl.class);
@@ -24,7 +26,24 @@ public class SpittleRepositoryImpl extends Repository implements SpittleReposito
     }
 
     public List<Spittle> findSpittles(long max, int count) {
-        return SpittleGenerator.generateSpittleList(count);
+        List<Spittle> spittleList = new ArrayList<Spittle>();
+        List<String> list = null;
+        try {
+            list = FileUtils.readLines(dbFile, Charset.defaultCharset());
+
+            for (String spittleStr : list) {
+                String[] strArr = spittleStr.split("\\|");
+                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+                Spittle spittle = new Spittle(strArr[1]);
+                spittle.setId(Long.valueOf(strArr[0]));
+
+                spittleList.add(spittle);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        return SpittleGenerator.generateSpittleList(count);
+        return spittleList;
     }
 
     public Spittle findOne(long spittleId) {
@@ -36,7 +55,7 @@ public class SpittleRepositoryImpl extends Repository implements SpittleReposito
     public Spittle save(Spittle spittle) throws DublicateSpittleMessageException {
         try {
             Random random = new Random();
-            spittle.setId((long)(random.nextInt(15)));
+            spittle.setId((long) (random.nextInt(15)));
 
             List<String> list = FileUtils.readLines(dbFile, Charset.defaultCharset());
             for (String s : list) {
@@ -46,15 +65,26 @@ public class SpittleRepositoryImpl extends Repository implements SpittleReposito
                     throw ex;
                 }
             }
-            FileUtils.writeStringToFile(dbFile, spittle.toString(), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(dbFile, spittle.toString().concat("\n"), Charset.defaultCharset(), true);
         } catch (IOException e) {
             LOG.error("Error while saving spittle", e);
         }
         return spittle;
     }
 
-    public static void main(String[] args) throws DublicateSpittleMessageException {
+    public static void main(String[] args) throws DublicateSpittleMessageException, ParseException {
+//        System.out.println(new Date("Thu Jan 29 16:02:53 EET 2009"));
+        Date date = new Date();
 
+        System.out.println(date.getTime());
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+        Date today = Calendar.getInstance().getTime();
+        String todayDate = dateFormat.format(today);
+        System.out.println(todayDate);
+
+        Date date1 = dateFormat.parse(todayDate);
+        System.out.println(date1);
     }
 
 }
