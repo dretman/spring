@@ -41,7 +41,7 @@ public class SpittleController {
         return spittleList;
     }
 
-    @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET, consumes = "application/json")
     public Spittle spittle(
             @PathVariable(value = "spittleId") long spittleId
     ) {
